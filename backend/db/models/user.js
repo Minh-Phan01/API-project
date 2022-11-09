@@ -1,6 +1,4 @@
 'use strict';
-const bcrypt = require('bcryptjs');
-
 const {
   Model,
   Validator
@@ -12,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    toSafeObject() {
+     toSafeObject() {
       const { id, username, email } = this;
       return { id, username, email };
     };
@@ -55,6 +53,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [3, 256],
+        isEmail: true
+      }
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -67,17 +81,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [3, 256],
-        isEmail: true
-      }
-    },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
-      allowNull: false,
       validate: {
         len: [60, 60]
       }
