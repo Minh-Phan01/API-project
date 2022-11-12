@@ -45,6 +45,18 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Review',
+    scopes: {
+      noDates: {
+        attributes: {
+        exclude: ['createdAt', 'updatedAt']
+        }
+      },
+      noReviewId: {
+        attributes: {
+          exclude: ['reviewId']
+        }
+      }
+    }
   });
   return Review;
 };
