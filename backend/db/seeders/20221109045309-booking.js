@@ -25,7 +25,7 @@ module.exports = {
       startDate: '2022-04-04',
       endDate: '2022-04-07'
     }
-   ])
+   ], {})
   },
 
   async down (queryInterface, Sequelize) {
