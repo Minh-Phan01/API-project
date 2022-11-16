@@ -268,9 +268,32 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
             }
         });
         return res.json(bookings);
-    }
+    } 
+});
 
-    
-})
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    const spotId = req.params.spotId;
+    const usersId = req.user.id;
+
+    const doomedSpot = await Spot.findByPk(spotId);
+
+    if (!doomedSpot) {
+        const err = new Error('Spot could not be found');
+        err.status = 404;
+        return next(err);
+    };
+
+    if (doomedSpot.ownerId === usersId) {
+        await doomedSpot.destroy();
+        return res.status(200).json({
+            'message': 'Successfully deleted'
+        });
+    } else {
+        return res.status(403).json({
+            message: 'Forbidden',
+            statusCode: 403
+        });
+    }
+});
 
 module.exports = router;
