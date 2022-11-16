@@ -7,8 +7,32 @@ const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../d
 
 
 router.get('/', async (req, res) => {
+    let { page, size } = req.query;
+    page = parseInt(page);
+    size = parseInt(size);
+    if (!page) page = 1;
+    if (!size) size = 10;
+    let limit;
+    let offset;
+
+    if (page === 0) {
+        page = null;
+        size = null;
+    } else if (page > 10) {
+        page = 10;
+    } else if (size > 20) {
+        size = 20
+    } else {
+        limit = size;
+        offset = size * (page - 1)
+    }
+
     const spots = await Spot.scope('defaultScope').findAll();
-    res.json(spots);
+    res.json({
+        spots,
+        page: page,
+        size: size
+    });
 })
 
 router.post('/', requireAuth, async (req, res) => {
@@ -242,7 +266,6 @@ router.post('/:spotId/bookings', async (req, res, next) => {
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
     const usersId = req.user.id;
-    console.log(spotId);
     const spot = await Spot.findByPk(spotId);
 
     if (!spot) {
