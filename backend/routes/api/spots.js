@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
-const { Sequelize } = require('sequelize')
+const { Sequelize } = require('sequelize');
+const { Op } = require('sequelize');
 const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 
 
@@ -191,26 +192,34 @@ router.post('/:spotId/bookings', async (req, res, next) => {
     const spot = await Spot.findByPk(spotId);
 
     const { startDate, endDate } = req.body;
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
 
     if (endDate < startDate) {
         const err = new Error('endDate cannot be on or before startDate');
         err.status = 400;
         return next(err);
     }
-
-    const bookingConflict = await Booking.findOne({
+  
+    const bookingsDate = await Booking.findOne({
         where: {
             spotId,
-            startDate,
-            endDate
+            [Op.or]: [
+                { startDate: {[Op.between]: [startDateObj, endDateObj] }},
+                { endDate: {[Op.between]: [startDateObj, endDateObj]}}
+              ]
         }
-    });
-        
-     if (bookingConflict) {
+    })
+
+    if (bookingsDate) {
         const err = new Error('Sorry, this spot is already booked for the specified dates');
         err.status = 403;
+        err.errors = {
+            "startDate": "Start date conflicts with an existing booking",
+            "endDate": "End date conflicts with an existing booking"
+          }
         return next(err);
-     };   
+    }
 
     if (!spot) {
         const err = new Error('Spot could not be found');
@@ -233,7 +242,7 @@ router.post('/:spotId/bookings', async (req, res, next) => {
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
     const usersId = req.user.id;
-   
+    console.log(spotId);
     const spot = await Spot.findByPk(spotId);
 
     if (!spot) {
