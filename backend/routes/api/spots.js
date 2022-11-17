@@ -102,6 +102,7 @@ router.get('/:spotId', async (req, res) => {
             [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating']
            ]
         },
+        group: ['Reviews.review', 'Reviews.stars', 'Spot.id', 'Owner.id', 'SpotImages.id'],
         include: [
             {model: SpotImage, attributes: ['id', 'url', 'preview']},
             {model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName']},
@@ -110,7 +111,7 @@ router.get('/:spotId', async (req, res) => {
             }}
         ],
     });
-
+    
     if (!spot.id) {
         const err = new Error('Spot could not be found');
         err.status = 404;
