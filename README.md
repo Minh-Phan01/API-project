@@ -1337,7 +1337,7 @@ Delete an existing image for a Spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /api/spots/:spotId/images/:imagesId
+  * URL: /api/spotImages/:spotImageId
   * Body: none
 
 * Successful Response
@@ -1374,7 +1374,7 @@ Delete an existing image for a Review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /api/reviews/:reviewId/images/:imagesId
+  * URL: /api/reviewImages/:reviewImageId
   * Body: none
 
 * Successful Response
