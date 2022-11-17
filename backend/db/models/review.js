@@ -12,15 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Review.belongsTo(models.User, {
-        foreignKey: 'userId'
+        foreignKey: 'userId',
+        onDelete: 'cascade'
       });
 
       Review.belongsTo(models.Spot, {
-        foreignKey: 'spotId'
+        foreignKey: 'spotId',
+        onDelete: 'cascade'
       });
 
       Review.hasMany(models.ReviewImage, {
-        foreignKey: 'reviewId'
+        foreignKey: 'reviewId',
+        onDelete: 'cascade'
       });
       
     }
