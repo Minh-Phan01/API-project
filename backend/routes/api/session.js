@@ -58,8 +58,9 @@ const validateLogin = [
   router.get(
     '/',
     restoreUser,
-    (req, res) => {
+    async (req, res) => {
       const { user } = req;
+      user.dataValues.token = await setTokenCookie(res, user)
       if (user) {
         return res.json({
           user: user.toSafeObject()

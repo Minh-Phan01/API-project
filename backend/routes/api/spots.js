@@ -55,7 +55,7 @@ router.post('/', requireAuth, async (req, res) => {
     res.json(newSpot);
 });
 
-router.post('/:spotId/images', requireAuth, async (req, res) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);
     const userId = req.user.id;
@@ -68,9 +68,6 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         return next(err);
     };
 //-----------------------------
-    if (userId !== spot.ownerId) {
-
-    }
 
     const newImage = await SpotImage.create({
         spotId,
@@ -92,7 +89,7 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json(spots);
 });
 
-router.get('/:spotId', async (req, res) => {
+router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId, {
         attributes: {
