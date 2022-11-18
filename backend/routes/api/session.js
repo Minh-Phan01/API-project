@@ -60,10 +60,12 @@ const validateLogin = [
     restoreUser,
     async (req, res) => {
       const { user } = req;
-      user.dataValues.token = await setTokenCookie(res, user)
+      
       if (user) {
+        const userObj = user.toSafeObject();
+        userObj.token = req.cookies.token;
         return res.json({
-          user: user.toSafeObject()
+          user: userObj
         });
       } else return res.json({});
     }
