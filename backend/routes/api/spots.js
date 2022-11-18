@@ -60,15 +60,14 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spot = await Spot.findByPk(spotId);
     const userId = req.user.id;
 
+
+//fix error handler below!!!    
     if (!spot) {
         const err = new Error('Spot could not be found');
         err.status = 404;
-        res.json({
-            message: err.message,
-            statusCode: err.status
-        });
+        return next(err);
     };
-
+//-----------------------------
     if (userId !== spot.ownerId) {
 
     }
@@ -111,16 +110,13 @@ router.get('/:spotId', async (req, res) => {
             }}
         ],
     });
-    
+ //fix error handler below!!!   -----------------
     if (!spot) {
         const err = new Error('Spot could not be found');
         err.status = 404;
-        return res.json({
-            message: err.message,
-            statusCode: err.status
-        });
+        return next(err);
     };
-
+//--------------------------------
     res.json(spot);
 })
 
@@ -252,14 +248,22 @@ router.post('/:spotId/bookings', async (req, res, next) => {
         return next(err)
         };
 
+    if (spot.ownerId !== userId)  {  
     const newBooking = await Booking.create({
         spotId,
         userId,
         startDate,
         endDate
-    })
+    });
 
     res.json(newBooking);
+    } else {
+        return res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
+        })
+    }
+
 });
 
 

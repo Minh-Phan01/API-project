@@ -29,10 +29,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
         where: {
              userId
         },
+
+     //Add User info below!!!--------   
         include: [
+            {model: User},
             {model: Spot},
             {model: ReviewImage}
         ]
+    //---------------------    
     });
 
     res.json({Reviews});
