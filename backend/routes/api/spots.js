@@ -249,6 +249,7 @@ router.post('/:spotId/bookings', async (req, res, next) => {
         };
 
     if (spot.ownerId !== userId)  {  
+        console.log(userId)
     const newBooking = await Booking.create({
         spotId,
         userId,
