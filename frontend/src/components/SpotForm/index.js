@@ -7,6 +7,9 @@ function CreateSpotForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const sessionUser = useSelector(state => state.session.user);
+    console.log(sessionUser);
+
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -56,7 +59,7 @@ function CreateSpotForm() {
 
     }
 
-    return (
+    return sessionUser.id ? (
         <section>
             <form onSubmit={handleSubmit}>
                 <input 
@@ -113,7 +116,7 @@ function CreateSpotForm() {
                 <button type="submit">Create new spot</button>
             </form>
         </section>
-    )
+    ) : null;
 };
 
 export default CreateSpotForm;

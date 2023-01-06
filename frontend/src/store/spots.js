@@ -46,7 +46,6 @@ export const createSpot = (spot) => async (dispatch) => {
     });
 
     const data = await response.json();
-    console.log(data);
     dispatch(addSpot(data));
     return data;
 }
@@ -57,7 +56,6 @@ const spotsReducer = (state = initialState, action) => {
     let newState = {...state};
     switch(action.type) {
         case GET_SPOTS:
-            console.log(action);
             action.spots.forEach(spot => {
                 newState[spot.id] = spot;
             })

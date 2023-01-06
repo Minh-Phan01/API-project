@@ -1,18 +1,26 @@
 import { allSpots } from "../../store/spots";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import SpotCard from "../SpotCard/SpotCard";
 import './SpotList.css';
+import { useEffect, useState } from "react";
 
 function SpotList() {
-    
+    const dispatch = useDispatch();
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const spotsObj = useSelector(state => state.spots);
     const spots = Object.values(spotsObj);
-    console.log(spots);
+    
+    useEffect(() => {
+        dispatch(allSpots()).then(() => setIsLoaded(true));
+    }, [dispatch]);
 
     return (
        <div>
         {
             spots.length > 0 && spots.map(spot => {
-               return <div key={spot.id}>{spot.address}</div>
+               return <SpotCard key={spot.id} spot={spot} />
             })
         }
        </div>
