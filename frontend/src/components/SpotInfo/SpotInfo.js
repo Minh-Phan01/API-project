@@ -3,12 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { allSpots } from '../../store/spots';
+import ReviewList from '../ReviewList';
 
 const SpotInfo = ({ spot }) => {
     const { spotId } = useParams();
     const thisSpot = useSelector(state => state.spots[spotId]);
-    console.log(thisSpot);
-    console.log(spotId);
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -26,6 +25,9 @@ const SpotInfo = ({ spot }) => {
                     <div>{thisSpot.city}</div>
                     <div>${thisSpot.price}</div>
                     <div>{thisSpot.previewImage}</div>
+                <h2>
+                    <ReviewList spot={spot}/>
+                </h2>
             </>)}
         </div>
     )

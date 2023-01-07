@@ -8,6 +8,7 @@ import SpotInfo from "./components/SpotInfo/SpotInfo";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import CreateSpotForm from "./components/SpotForm";
+import EditSpotFrom from "./components/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,9 +34,13 @@ function App() {
           <Route path='/spots/new'>
             <CreateSpotForm />
           </Route>
+          <Route path='/spots/edit/:spotId'>
+            <EditSpotFrom />
+          </Route>
           <Route path='/spots/:spotId'>
             <SpotInfo />
           </Route>
+          
         </Switch>
       )}
     </>

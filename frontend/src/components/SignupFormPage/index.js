@@ -15,7 +15,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser.id) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +24,7 @@ function SignupFormPage() {
       return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
         .catch(async (res) => {
           const data = await res.json();
+          console.log(data);
           if (data && data.errors) setErrors(data.errors);
         });
     }
@@ -33,7 +34,7 @@ function SignupFormPage() {
   return (
     <form onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.length > 0 && errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
         Email
