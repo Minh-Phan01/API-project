@@ -7,7 +7,6 @@ const EditSpotFrom = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
-
     const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {

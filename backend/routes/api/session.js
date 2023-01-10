@@ -64,9 +64,10 @@ const validateLogin = [
       if (user) {
         const userObj = user.toSafeObject();
         userObj.token = req.cookies.token;
-        return res.json({
-          user: userObj
-        });
+        return res.json(
+          // user: userObj
+          user.dataValues
+        );
       } else return res.json({});
     }
   );

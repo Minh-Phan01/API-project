@@ -12,19 +12,25 @@ function ReviewList({spot}) {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const spotReviewObj = useSelector(state => state.reviews);
-    const spotReviews = Object.values(spotReviewObj)
-    console.log(spotReviews);
-    
+    const reviews = Object.values(spotReviewObj);
+    const spotReviews = reviews.filter(review =>  {
+        if (review.spotId === thisSpot.id) {
+            return review
+        }
+    })
 
     useEffect(() => {
         dispatch(allReviews(thisSpot)).then(() => setIsLoaded(true));
     }, [dispatch]);
 
+
     return (
       <div>
         {
             spotReviews.map(review => {
-                return <div>{review.review}</div>
+                return <div key={review.id}>
+                    <ReviewCard review={review} />
+                </div>
             })
         }
       </div>

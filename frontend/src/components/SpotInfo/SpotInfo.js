@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { allSpots } from '../../store/spots';
 import ReviewList from '../ReviewList';
+import CreateReviewForm from '../CreateReviewForm';
 
 const SpotInfo = ({ spot }) => {
     const { spotId } = useParams();
@@ -27,6 +28,9 @@ const SpotInfo = ({ spot }) => {
                     <div>{thisSpot.previewImage}</div>
                 <h2>
                     <ReviewList spot={spot}/>
+                </h2>
+                <h2>
+                    <CreateReviewForm />
                 </h2>
             </>)}
         </div>

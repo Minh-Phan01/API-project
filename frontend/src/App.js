@@ -9,6 +9,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import CreateSpotForm from "./components/SpotForm";
 import EditSpotFrom from "./components/EditSpotForm";
+import CreateReviewForm from "./components/CreateReviewForm";
+import EditReviewForm from "./components/EditReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,10 +39,15 @@ function App() {
           <Route path='/spots/edit/:spotId'>
             <EditSpotFrom />
           </Route>
-          <Route path='/spots/:spotId'>
+          <Route exact path='/spots/:spotId'>
             <SpotInfo />
           </Route>
-          
+          {/* <Route path='/spots/:spotId/reviews'>
+            <CreateReviewForm />
+          </Route> */}
+          <Route path='/spots/:spotId/reviews/edit/:reviewId'>
+            <EditReviewForm />
+          </Route>
         </Switch>
       )}
     </>
