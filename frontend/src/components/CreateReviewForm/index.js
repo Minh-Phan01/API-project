@@ -13,7 +13,7 @@ const CreateReviewForm = () => {
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
 
         let newReview = {
             spotId,
@@ -23,18 +23,12 @@ const CreateReviewForm = () => {
 
         await dispatch(createReview(newReview));
         history.push(`/spots/${spotId}`)
-        .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
-        })
+       
     }
 
     return (
         <section>
             <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
                 <textarea 
                 type='text'
                 placeholder='Add Review'

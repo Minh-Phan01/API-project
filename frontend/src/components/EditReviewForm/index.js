@@ -9,7 +9,8 @@ const EditReviewForm = () => {
     const history = useHistory();
     
     const editedReview = useSelector(state => state.reviews[reviewId]);
-    
+    const currentUser = useSelector(state => state.session.user)
+    console.log(currentUser);
 
     const [review, setReview] = useState(editedReview?.review);
     const [stars, setStars] = useState(editedReview?.stars);
@@ -21,7 +22,8 @@ const EditReviewForm = () => {
         let payload = {
             id: reviewId,
             review,
-            stars
+            stars, 
+            currentUser
         }
 
         let updatedReview;
@@ -31,6 +33,7 @@ const EditReviewForm = () => {
 
     return (
         <section>
+            <h1>Edit Review</h1>
             <form onSubmit={handleSubmit}>
             <textarea 
                 type='text'

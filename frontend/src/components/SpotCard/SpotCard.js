@@ -25,6 +25,7 @@ const SpotCard = ({ spot }) => {
 
     return (
         <div className='spot-card'>
+            <img src={spot.previewImage}/>
             <div>{spot.address}</div>
             <div>{spot.name}</div>
             <button onClick={viewSpotInfo}>View Spot Info</button>
