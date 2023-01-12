@@ -37,7 +37,7 @@ const SpotInfo = ({ spot }) => {
                     <ReviewList spot={spot}/>
                 </h2>
                 <h2>
-                   {isOwner ||  <CreateReviewForm /> }
+                   {isOwner ||  <CreateReviewForm spot={spot}/> }
                 </h2>
             </>)}
         </div>

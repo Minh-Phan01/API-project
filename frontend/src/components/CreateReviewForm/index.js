@@ -1,12 +1,16 @@
 import { useParams, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { createReview } from '../../store/reviews';
+import { allReviews } from '../../store/reviews';
 
 const CreateReviewForm = () => {
     const { spotId } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
+    
+    const thisSpot = useSelector(state => state.spots[spotId]);
+    
 
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0);
@@ -16,12 +20,13 @@ const CreateReviewForm = () => {
         e.preventDefault();
 
         let newReview = {
-            spotId,
+            spotId: parseInt(spotId),
             review,
             stars
         }
 
-        await dispatch(createReview(newReview));
+        await dispatch(createReview(newReview)).then(() => setReview('')).then(() => setStars(0));
+        // dispatch(allReviews(thisSpot));
         history.push(`/spots/${spotId}`)
        
     }

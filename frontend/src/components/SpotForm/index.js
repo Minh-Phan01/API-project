@@ -8,7 +8,7 @@ function CreateSpotForm() {
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
-    console.log(sessionUser);
+    
 
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -20,7 +20,7 @@ function CreateSpotForm() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [errorMessages, setErrorMessages] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const updateAddress = e => setAddress(e.target.value);
     const updateCity = e => setCity(e.target.value);
@@ -52,9 +52,9 @@ function CreateSpotForm() {
 
         let newSpot;
         newSpot = await dispatch(createSpot(payload));
-
+        
         if (newSpot) {
-            history.push(`/api/spots/${newSpot.id}`);
+            history.push(`/spots/${newSpot.id}`);
         }
 
     }

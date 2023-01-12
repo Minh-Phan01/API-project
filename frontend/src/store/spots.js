@@ -59,9 +59,13 @@ export const createSpot = (spot) => async (dispatch) => {
         }),
     });
 
-    const data = await response.json();
-    dispatch(addSpot(data));
-    return data;
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addSpot(data));
+        return data;
+    }
+
+    return response;
 }
 
 

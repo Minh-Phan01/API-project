@@ -19,8 +19,12 @@ function ReviewList({spot}) {
         }
     })
 
+
+
+    console.log(spotReviewObj);
+
     useEffect(() => {
-        dispatch(allReviews(thisSpot)).then(() => setIsLoaded(true));
+        dispatch(allReviews(spotId)).then(() => setIsLoaded(true));
     }, [dispatch]);
 
 

@@ -10,8 +10,11 @@ const ReviewCard = ({review}) => {
         history.push(`/spots/${review.spotId}/reviews/edit/${review.id}`);
     }
 
-    const deleteButton = () => {
-        dispatch(deletedReview(review.id))
+    const deleteButton = (e) => {
+        const accept = window.confirm('Deleting Review');
+        if (accept) {
+            dispatch(deletedReview(review.id));
+        }
     }
 
     const sessionUser = useSelector(state => state.session.user);

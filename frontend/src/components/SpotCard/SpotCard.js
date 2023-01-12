@@ -16,8 +16,12 @@ const SpotCard = ({ spot }) => {
         history.push(`/spots/edit/${spot.id}`);
     }
 
-    const deleteButton = () => {
-        dispatch(deleteSpotThunk(spot.id))
+    const deleteButton = (e) => {
+        
+        const accept = window.confirm('Deleting Spot');
+        if (accept) {
+            dispatch(deleteSpotThunk(spot.id));
+        }
     }
 
     const sessionUser = useSelector(state => state.session.user);
