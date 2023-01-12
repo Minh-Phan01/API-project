@@ -20,7 +20,7 @@ const CreateReviewForm = () => {
         e.preventDefault();
 
         let newReview = {
-            spotId: parseInt(spotId),
+            spotId,
             review,
             stars
         }
