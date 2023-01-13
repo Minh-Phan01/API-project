@@ -50,8 +50,9 @@ function CreateSpotForm() {
             previewImage
         };
 
+        
         let newSpot;
-        newSpot = await dispatch(createSpot(payload));
+        newSpot = await dispatch(createSpot(payload))
         
         if (newSpot) {
             history.push(`/spots/${newSpot.id}`);

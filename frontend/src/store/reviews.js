@@ -45,16 +45,23 @@ export const allReviews = (spotId) => async (dispatch) => {
 }
 
 //CREATE A REVIEW
-export const createReview = (review) => async (dispatch) => {
-    const {spotId} = review;
+export const createReview = (newReview) => async (dispatch) => {
+    const {spotId, review, stars, currentUser} = newReview;
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
-        body: JSON.stringify(review)
+        body: JSON.stringify({
+            spotId,
+            review,
+            stars, 
+            currentUser
+        })
     });
 
 
     if(response.ok) {
-        const addedReview = await response.json();
+        let addedReview;
+        addedReview = await response.json();
+        addedReview.User = currentUser; 
         dispatch (addReview(addedReview));
         return addedReview;
     }
@@ -77,7 +84,6 @@ export const reviewEdit = (reviewEdit) => async (dispatch) => {
     if (response.ok) {
         const editedReview = await response.json();
         dispatch(editReview(editedReview));
-        console.log(editedReview);
         return editedReview;
     }
 }

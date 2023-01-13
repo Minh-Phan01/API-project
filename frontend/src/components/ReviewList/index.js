@@ -14,7 +14,7 @@ function ReviewList({spot}) {
     const spotReviewObj = useSelector(state => state.reviews);
     const reviews = Object.values(spotReviewObj);
     const spotReviews = reviews.filter(review =>  {
-        if (review.spotId === thisSpot.id) {
+        if (parseInt(review.spotId) === thisSpot.id) {
             return review
         }
     })

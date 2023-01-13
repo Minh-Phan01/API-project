@@ -10,8 +10,8 @@ const CreateReviewForm = () => {
     const dispatch = useDispatch();
     
     const thisSpot = useSelector(state => state.spots[spotId]);
+    const currentUser = useSelector(state => state.session.user);
     
-
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0);
     const [errors, setErrors] = useState([]);
@@ -22,9 +22,10 @@ const CreateReviewForm = () => {
         let newReview = {
             spotId,
             review,
-            stars
+            stars,
+            currentUser
         }
-
+        console.log(newReview);
         await dispatch(createReview(newReview)).then(() => setReview('')).then(() => setStars(0));
         // dispatch(allReviews(thisSpot));
         history.push(`/spots/${spotId}`)
