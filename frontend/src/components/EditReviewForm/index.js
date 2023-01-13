@@ -27,7 +27,11 @@ const EditReviewForm = () => {
         }
 
         let updatedReview;
-        updatedReview = await dispatch(reviewEdit(payload));
+        updatedReview = await dispatch(reviewEdit(payload))
+        .catch(async res => {
+            const data = await res.json();
+            if(data.errors) setErrors(data.errors);
+        })
         history.push(`/spots/${editedReview.spotId}`)
     }
 
@@ -35,6 +39,7 @@ const EditReviewForm = () => {
         <section>
             <h1>Edit Review</h1>
             <form onSubmit={handleSubmit}>
+                {errors.map((errors, idx) => <li key={idx}>{errors.map}</li>)}
             <textarea 
                 type='text'
                 placeholder='Edit Review'

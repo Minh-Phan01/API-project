@@ -17,7 +17,7 @@ function SpotList() {
     }, [dispatch]);
 
     return (
-       <div>
+       <div className="spot-container">
         {
             spots.length > 0 && spots.map(spot => {
                return <SpotCard key={spot.id} spot={spot} />

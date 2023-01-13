@@ -25,8 +25,13 @@ const CreateReviewForm = () => {
             stars,
             currentUser
         }
-        console.log(newReview);
-        await dispatch(createReview(newReview)).then(() => setReview('')).then(() => setStars(0));
+    
+        await dispatch(createReview(newReview)).then(() => setReview('')).then(() => setStars(0))
+        .catch(async res => {
+            const data = await res.json();
+            console.log(data.errors);
+            if (data.errors) setErrors(data.errors);
+        })
         // dispatch(allReviews(thisSpot));
         history.push(`/spots/${spotId}`)
        
@@ -35,20 +40,23 @@ const CreateReviewForm = () => {
     return (
         <section>
             <form onSubmit={handleSubmit}>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <textarea 
                 type='text'
                 placeholder='Add Review'
                 value={review}
-                required='yes'
+                // required='yes'
                 onChange={e => setReview(e.target.value)}
                 />
                 <input 
                 type='number'
                 placeholder='Stars'
                 value={stars}
-                min='1'
-                max='5'
-                required='yes'
+                // min='1'
+                // max='5'
+                // required='yes'
                 onChange={e => setStars(e.target.value)}
                 />
                 <button type='submit'>Add Review</button>

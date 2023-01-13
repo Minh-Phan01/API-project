@@ -2,9 +2,70 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
 const { Sequelize } = require('sequelize');
+const { handleValidationErrors } = require('../../utils/validation');
+const { check, query } = require('express-validator');
 const { Op } = require('sequelize');
 const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 
+const validateSpot = [
+   check('address')//
+    .exists({ checkFalsy: true })
+    .withMessage('Street address is required'),
+
+   check('city')//
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+
+   check('state')
+    .exists({ checkFalsy: true })
+    .withMessage('State is required'),
+
+   check('country')
+    .exists({ checkFalsy: true })
+    .withMessage('Country is required'),
+
+   check('lat')
+    .exists({ checkFalsy: true })
+    .withMessage('Latitude is not valid').bail()
+    .isNumeric({ checkFalsy: true })
+    .withMessage('Latitude is not valid'),
+
+   check('lng')
+    .exists({ checkFalsy: true })
+    .withMessage('Longitude is not valid').bail()
+    .isNumeric({ checkFalsy: true })
+    .withMessage('Longitude is not valid'),
+
+   check("name")
+    .exists({ checkFalsy: true })
+    .withMessage("Name must be less than 50 characters").bail()
+    .isLength({ max: 51 })
+    .withMessage("Name must be less than 50 characters"),
+
+   check("description")
+    .exists({ checkFalsy: true })
+    .withMessage("Description is required"),
+
+   check("price")
+    .exists({ checkFalsy: true })
+    .withMessage("Price per day is required").bail()
+    .isInt({ checkFalsy: true })
+    .withMessage("Price per day is required"),
+
+  handleValidationErrors,
+];
+
+const validateReview = [
+    check("review")
+      .exists({ checkFalsy: true })
+      .withMessage("Review text is required"),
+    check("stars")
+      .exists({ checkFalsy: true })
+      .isInt({ min: 1, max: 5 })
+      .withMessage("Stars must be an integer from 1 to 5"),
+  
+    handleValidationErrors,
+  ];
 
 router.get('/', async (req, res) => {
     let { page, size } = req.query;
@@ -35,7 +96,7 @@ router.get('/', async (req, res) => {
     });
 })
 
-router.post('/', requireAuth, async (req, res) => {
+router.post('/', requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
     
     const newSpot = await Spot.create({
@@ -117,7 +178,7 @@ router.get('/:spotId', async (req, res, next) => {
     res.json(spot);
 })
 
-router.put('/:spotId', requireAuth, async (req, res, next) => {
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const spotId = req.params.spotId;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
@@ -145,7 +206,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     res.json(spot);
 })
 
-router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
     const userId = req.user.id;
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);

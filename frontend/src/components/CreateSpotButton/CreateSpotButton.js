@@ -11,7 +11,7 @@ const CreateSpotButton = () => {
     
 
     return (
-        <button onClick={createSpot}>Create New Spot</button>
+        <button className='button' onClick={createSpot}>Create New Spot</button>
     )
 }
 

@@ -1,0 +1,15 @@
+img {
+    width: 25%;
+    border-radius: 30px;
+}
+
+.spot-info-page {
+    display: flex;
+    justify-content: center;
+}
+
+.spot-info {
+    border: solid black 5px;
+    border-radius: 30px;
+    margin: 10px;
+}

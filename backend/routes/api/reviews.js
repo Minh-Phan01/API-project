@@ -1,8 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
+const { check, query } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 const { Sequelize } = require('sequelize')
 const { Spot, User, ReviewImage, Review } = require('../../db/models');
+
+const validateReview = [
+    check("review")
+      .exists({ checkFalsy: true })
+      .withMessage("Review text is required"),
+    check("stars")
+      .exists({ checkFalsy: true })
+      .isInt({ min: 1, max: 5 })
+      .withMessage("Stars must be an integer from 1 to 5"),
+  
+    handleValidationErrors,
+  ];
 
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const reviewId = req.params.reviewId;
@@ -42,7 +56,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json({Reviews});
 })
 
-router.put('/:reviewId', async (req, res, next) => {
+router.put('/:reviewId', validateReview, async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const { id, userId, spotId, review, stars } = req.body;
 

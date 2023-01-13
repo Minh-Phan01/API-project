@@ -8,7 +8,7 @@ const MySpotButton = () => {
     }
 
     return (
-        <button onClick={mySpot}>My Spots</button>
+        <button className='button' onClick={mySpot}>My Spots</button>
     )
 }
 

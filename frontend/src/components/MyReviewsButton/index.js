@@ -8,7 +8,7 @@ const MyReviewsButton = () => {
     }
 
     return (
-        <button onClick={myReviews}>My Reviews</button>
+        <button className='button' onClick={myReviews}>My Reviews</button>
     )
 }
 

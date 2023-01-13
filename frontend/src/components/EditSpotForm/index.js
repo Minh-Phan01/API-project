@@ -57,14 +57,21 @@ const EditSpotFrom = () => {
         }
 
         let updatedSpot;
-        updatedSpot = await dispatch(editingSpot(payload));
-        console.log(updatedSpot);
+        updatedSpot = await dispatch(editingSpot(payload))
+        .catch(async res => {
+            const data = await res.json();
+            console.log(data.errors);
+            if (data.errors) setErrors(data.errors);
+        })
         history.push(`/spots/${updatedSpot.id}`)
     }
 
     return (
         <section>
             <form onSubmit={handleSubmit}>
+             <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <input 
                     type='text'
                     placeholder="Address"

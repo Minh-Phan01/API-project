@@ -1,3 +1,45 @@
 .spot-card {
-    border: 2px solid black 
+    border: 2px solid rgb(127, 244, 228);
+    width: 15%;
+    margin: 10px;
+    border-radius: 30px;
+    background-color:rgb(188, 221, 217)
 }
+
+.spot-card-images {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 150px;
+    object-fit: fill;
+    border-radius: 30px;
+}
+
+.spot-image {
+    display: flex;
+    justify-content: center;
+}
+
+.spot-card-address {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.spot-card-name {
+    display: flex;
+    justify-content: center;
+    font-family: "Goudy Bookletter 1911", sans-serif;;
+}
+
+.spot-card-price {
+    display: flex;
+    justify-content: center;
+}
+
+.spot-card-buttons {
+    display: flex;
+    justify-content: center;
+}
+

@@ -94,6 +94,7 @@ export const editingSpot = (spot) => async (dispatch) => {
         dispatch(editSpot(editedSpot));
         return editedSpot;
     }
+    return response;
 }
 
 

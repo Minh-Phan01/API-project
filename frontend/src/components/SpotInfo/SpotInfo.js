@@ -24,11 +24,12 @@ const SpotInfo = ({ spot }) => {
     }
     
     return (
-        <div> 
+        <div className='spot-info-page'> 
            {thisSpot &&  
           (<>
           <img src={thisSpot.previewImage}/>
-           <h1>{thisSpot.address}</h1>
+          <div className='spot-info'>
+            <h1>{thisSpot.address}</h1>
                 <h2>{thisSpot.name}'s Spot</h2>
                     <div>{thisSpot.city}</div>
                     <div>${thisSpot.price}</div>
@@ -36,6 +37,8 @@ const SpotInfo = ({ spot }) => {
                 <h2>
                     <ReviewList spot={spot}/>
                 </h2>
+            
+          </div>
                 <h2>
                    {isOwner ||  <CreateReviewForm spot={spot}/> }
                 </h2>

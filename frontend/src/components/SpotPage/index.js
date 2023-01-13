@@ -14,10 +14,20 @@ function SpotPage() {
     }, []);
 
     return (
-        <div>
-            <CreateSpotButton />
-            <MySpotButton />
-            <MyReviewsButton />
+        <div className='background'>
+            <div className='buttons-bar'>
+                <div className='buttons'>
+                    <div className='create-spot-button'>
+                        <CreateSpotButton />
+                    </div>
+                    <div className='my-spot-button'>
+                         <MySpotButton />
+                    </div>
+                    <div className='my-reviews-button'>
+                         <MyReviewsButton />
+                    </div>
+                </div>
+            </div>
             <SpotList />
 
         </div>

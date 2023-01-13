@@ -29,12 +29,23 @@ const SpotCard = ({ spot }) => {
 
     return (
         <div className='spot-card'>
-            <img src={spot.previewImage}/>
-            <div>{spot.address}</div>
-            <div>{spot.name}</div>
-            <button onClick={viewSpotInfo}>View Spot Info</button>
-            {isOwner && <button onClick={deleteButton}>Delete</button>}
-            {isOwner && <button onClick={editSpotInfo}>Edit Spot</button>}
+            <div className='spot-image'>
+                <img className='spot-card-images' src={spot.previewImage}/>
+            </div>
+            <div className='spot-card-address'>
+                 <div>{spot.address}</div>
+            </div>
+            <div className='spot-card-name'>
+                 <div>{spot.name}</div>
+            </div>
+            <div className='spot-card-price'>
+                 <div>${spot.price}/night</div>
+            </div>
+            <div className='spot-card-buttons'>
+                <button onClick={viewSpotInfo}>View Spot Info</button>
+                {isOwner && <button onClick={deleteButton}>Delete</button>}
+                {isOwner && <button onClick={editSpotInfo}>Edit Spot</button>}
+            </div>
         </div>
     )
 }

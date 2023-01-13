@@ -86,6 +86,7 @@ export const reviewEdit = (reviewEdit) => async (dispatch) => {
         dispatch(editReview(editedReview));
         return editedReview;
     }
+    return response;
 }
 
 //DELETE A REVIEW

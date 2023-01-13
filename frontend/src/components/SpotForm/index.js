@@ -16,7 +16,7 @@ function CreateSpotForm() {
     const [country, setCountry] = useState('');
     const [lat, setLat] = useState('');
     const [lng, setLng] = useState(0);
-    const [name, setName] = useState(0);
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [previewImage, setPreviewImage] = useState('');
@@ -50,19 +50,30 @@ function CreateSpotForm() {
             previewImage
         };
 
-        
-        let newSpot;
-        newSpot = await dispatch(createSpot(payload))
-        
-        if (newSpot) {
-            history.push(`/spots/${newSpot.id}`);
-        }
+     
+         let newSpot;
+         newSpot = await dispatch(createSpot(payload))
+        .catch(async res => {
+            const data = await res.json();
+            console.log(data.errors);
+            if (data.errors) setErrors(data.errors);
+        })
+
+         history.push(`/spots/${newSpot.id}`);
+
+    
+        // if (newSpot) {
+        //     history.push(`/spots/${newSpot.id}`);
+        // }
 
     }
 
     return sessionUser.id ? (
         <section>
             <form onSubmit={handleSubmit}>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <input 
                     type='text'
                     placeholder="Address"
