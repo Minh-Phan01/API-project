@@ -57,7 +57,6 @@ export const createReview = (newReview) => async (dispatch) => {
         })
     });
 
-
     if(response.ok) {
         let addedReview;
         addedReview = await response.json();

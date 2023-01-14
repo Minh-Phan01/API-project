@@ -19,7 +19,7 @@ const CreateReviewForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setErrors([]);
         let newReview = {
             spotId,
             review,
@@ -27,11 +27,13 @@ const CreateReviewForm = () => {
             currentUser
         }
     
-        await dispatch(createReview(newReview)).then(() => setReview('')).then(() => setStars(0))
+        await dispatch(createReview(newReview))
+        .then(() => setReview('')).then(() => setStars(0))
         .catch(async res => {
+            console.log(res);
             const data = await res.json();
-            console.log(data.errors);
-            if (data.errors) setErrors(data.errors);
+            console.log('errors', data);
+            if (data.errors && data) setErrors(data.errors);
         })
         // dispatch(allReviews(thisSpot));
         history.push(`/spots/${spotId}`)
