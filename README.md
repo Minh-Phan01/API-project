@@ -1,5 +1,43 @@
-# AirBnB
-# `<name of application here>`
+# AirBnB Clone
+
+## Introduction
+This is my attempt at creating an Airbnb clone. You can create a spot, edit a spot, create a review, and edit a review.
+
+## Technology Used
+
+- Node.js
+- Express
+- Sequelize
+- Sqlite3
+- React
+- Redux
+- Html5
+- Css
+- Git
+- Javascript
+
+## Available Features
+Users are able to see all spots available, create their own spot to host, edit their existing spots, and delete their own spots. They are also able to add reviews to existing spots, see all reviews for spots, edit & delete their own reviews.
+
+## Set up
+
+1. "npm install" in both frontend & backend folders
+2. Open terminals for both frontend & backend
+3. Create a .env file in the backend folder and add this code inside:
+
+```
+PORT=8000
+DB_FILE=db/dev.db
+JWT_SECRET=*censored*
+JWT_EXPIRES_IN=604800
+SCHEMA=airbnb_project
+```
+JWT_SECRET will be a JWT you generate yourself
+
+4. In the backend directory, you will run the command:
+```
+npm run rebuild
+```
 
 ## Database Schema Design
 

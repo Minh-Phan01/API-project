@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpot } from "../../store/spots";
 import { useHistory } from "react-router-dom";
+import './SpotForm.css';
 
 function CreateSpotForm() {
     const dispatch = useDispatch();
@@ -69,10 +70,12 @@ function CreateSpotForm() {
     }
 
     return sessionUser.id ? (
+        <>
+        <h1 className="create-spot-header">Host a Spot!</h1>
         <section>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='spot-form'>
                 <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    {errors.map((error, idx) => <li className='review-error' key={idx}>{error}</li>)}
                 </ul>
                 <input 
                     type='text'
@@ -106,7 +109,7 @@ function CreateSpotForm() {
                     onChange={updateLng}/>
                 <input 
                     type='text'
-                    placeholder="Name"
+                    placeholder="Owner Name"
                     value={name}
                     onChange={updateName}/>
                 <input 
@@ -128,6 +131,7 @@ function CreateSpotForm() {
                 <button type="submit">Create new spot</button>
             </form>
         </section>
+        </>
     ) : null;
 };
 

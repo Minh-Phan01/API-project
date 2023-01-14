@@ -10,7 +10,10 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser.id) {
     sessionLinks = (
+      <>
       <ProfileButton user={sessionUser} />
+      <a href='https://github.com/Minh-Phan01/Airbnb-project'>Project Github</a>
+      </>
     );
   } else {
     sessionLinks = (

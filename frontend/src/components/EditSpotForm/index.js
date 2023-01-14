@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Redirect } from 'react-router-dom';
 import { editingSpot, allSpots, deleteSpot } from '../../store/spots';
+import './EditSpotForm.css';
 
 const EditSpotFrom = () => {
     const { spotId } = useParams();
@@ -13,7 +14,7 @@ const EditSpotFrom = () => {
         dispatch(allSpots)
     }, [dispatch])
 
-    const editedSpot = useSelector(state => state.spots.id);
+    const editedSpot = useSelector(state => state.spots[spotId]);
 
     const [address, setAddress] = useState(editedSpot?.address);
     const [city, setCity] = useState(editedSpot?.city);
@@ -68,9 +69,9 @@ const EditSpotFrom = () => {
 
     return (
         <section>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='spot-form'>
              <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    {errors.map((error, idx) => <li className = 'review-error' key={idx}>{error}</li>)}
                 </ul>
                 <input 
                     type='text'

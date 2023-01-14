@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { createReview } from '../../store/reviews';
 import { allReviews } from '../../store/reviews';
+import './CreateReviewForm.css';
 
 const CreateReviewForm = () => {
     const { spotId } = useParams();
@@ -38,19 +39,19 @@ const CreateReviewForm = () => {
     }
 
     return (
-        <section>
+        <section className='review-section'>
             <form onSubmit={handleSubmit}>
                 <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    {errors.map((error, idx) => <li className='review-error' key={idx}>{error}</li>)}
                 </ul>
-                <textarea 
+                <textarea className='review-text-area'
                 type='text'
                 placeholder='Add Review'
                 value={review}
                 // required='yes'
                 onChange={e => setReview(e.target.value)}
                 />
-                <input 
+                <input className='review-input-area'
                 type='number'
                 placeholder='Stars'
                 value={stars}
@@ -59,7 +60,7 @@ const CreateReviewForm = () => {
                 // required='yes'
                 onChange={e => setStars(e.target.value)}
                 />
-                <button type='submit'>Add Review</button>
+                <button className='submit-button' type='submit'>Add Review</button>
 
                 
             </form>

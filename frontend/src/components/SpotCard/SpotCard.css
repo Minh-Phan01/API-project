@@ -3,7 +3,8 @@
     width: 15%;
     margin: 10px;
     border-radius: 30px;
-    background-color:rgb(188, 221, 217)
+    background-color:rgb(188, 221, 217);
+    box-shadow: 10px 5px 5px rgb(51, 50, 50);
 }
 
 .spot-card-images {
@@ -25,17 +26,21 @@
     justify-content: center;
     font-weight: bold;
     font-size: x-large;
+    font-family: 'DS Marker Felt', sans-serif;
 }
 
 .spot-card-name {
     display: flex;
     justify-content: center;
     font-family: "Goudy Bookletter 1911", sans-serif;;
+    font-family: 'DS Marker Felt', sans-serif;
+    font-size: large;
 }
 
 .spot-card-price {
     display: flex;
     justify-content: center;
+    font-family: 'DS Marker Felt', sans-serif;
 }
 
 .spot-card-buttons {

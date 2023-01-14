@@ -1,0 +1,25 @@
+.review-section {
+    display: inline-block;
+}
+
+.review-text-area {
+    padding-left: 5px;
+    outline: none;
+    border-radius: 10px;
+    margin: 5px;
+    width: 100%;
+}
+
+.review-input-area {
+    border-radius: 10px;
+    width: 10%;
+}
+
+.submit-button {
+    border-radius: 5px;
+}
+
+.review-error {
+    color: rgb(248, 111, 111);
+    font-size: 20px;
+}

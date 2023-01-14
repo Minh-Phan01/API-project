@@ -1,0 +1,13 @@
+.spot-form {
+    padding: 16px;
+    max-width: 800px;
+    margin-left: 20%;
+    background-color: rgb(195, 255, 245);
+    border-radius: 5px;
+}
+
+.create-spot-header {
+    display: flex;
+    justify-content: center;
+    color: rgb(188, 221, 217)
+}

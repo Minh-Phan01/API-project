@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deletedReview } from "../../store/reviews";
+import './ReviewCard.css'
 
 const ReviewCard = ({review}) => {
     const history = useHistory();
@@ -20,11 +21,13 @@ const ReviewCard = ({review}) => {
     const sessionUser = useSelector(state => state.session.user);
     const isOwner = sessionUser.id === review.userId;
     return (
-        <div>
-            <p>{review?.User?.firstName} {review?.User?.lastName}: {review.review} </p>
-            <dl>Stars: {review.stars}</dl>
-            {isOwner && <button onClick={editReviewInfo}>Edit Review</button>}
-            {isOwner && <button onClick={deleteButton}>Delete Review</button>}
+        <div className="review-card">
+            <p className="review-text">{review?.User?.firstName} {review?.User?.lastName}: {review.review} </p>
+            <dl className="review-text">Stars: {review.stars}</dl>
+            <div className="review-card-buttons">
+                {isOwner && <button  className='review-edit-button' onClick={editReviewInfo}>Edit Review</button>}
+                {isOwner && <button className='review-delete-button' onClick={deleteButton}>Delete Review</button>}
+            </div>
         </div>
     )
 }

@@ -27,19 +27,20 @@ const SpotInfo = ({ spot }) => {
         <div className='spot-info-page'> 
            {thisSpot &&  
           (<>
-          <img src={thisSpot.previewImage}/>
-          <div className='spot-info'>
-            <h1>{thisSpot.address}</h1>
-                <h2>{thisSpot.name}'s Spot</h2>
-                    <div>{thisSpot.city}</div>
-                    <div>${thisSpot.price}</div>
-                    <div>{thisSpot.description}</div>
-                <h2>
+          <div className='spot-info-content'>
+            <img src={thisSpot.previewImage}/>
+            <div className='spot-info'>
+                <h1 className='spot-address'>{thisSpot.address}</h1>
+                 <h2 className='spot-name'>{thisSpot.name}'s Spot</h2>
+                    <div className='spot-city'>{thisSpot.city}</div>
+                    <div className='spot-price'>${thisSpot.price}/night</div>
+                    <div className='spot-description'>{thisSpot.description}</div>
+            </div>
+          </div>
+                <h2 className='review-list-form'>
                     <ReviewList spot={spot}/>
                 </h2>
-            
-          </div>
-                <h2>
+                <h2 className='add-review'>
                    {isOwner ||  <CreateReviewForm spot={spot}/> }
                 </h2>
             </>)}

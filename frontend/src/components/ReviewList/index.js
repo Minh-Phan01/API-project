@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { allReviews } from "../../store/reviews";
 import { useParams } from "react-router-dom";
 import ReviewCard from "../ReviewCard.js";
+import './ReviewList.css';
 
 function ReviewList({spot}) {
     const dispatch = useDispatch();
@@ -29,10 +30,11 @@ function ReviewList({spot}) {
 
 
     return (
-      <div>
+      <div className="review-list">
+        <h1 className="reviews-header">Reviews</h1>
         {
             spotReviews.map(review => {
-                return <div key={review.id}>
+                return <div className="one-review" key={review.id}>
                     <ReviewCard review={review} />
                 </div>
             })

@@ -4,12 +4,56 @@ img {
 }
 
 .spot-info-page {
-    display: flex;
-    justify-content: center;
+    display: block;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
 }
 
 .spot-info {
     border: solid black 5px;
     border-radius: 30px;
     margin: 10px;
+    width: 30%;
+    height: 30%;
+    background-color: rgb(208, 231, 231);
+    box-shadow: 10px 5px 5px rgb(74, 70, 70);
 }
+
+.spot-info-content {
+    display: flex;
+}
+
+.spot-address {
+    display: flex;
+    justify-content: center;
+    font-family: 'DS Marker Felt', sans-serif;
+}
+
+.spot-name {
+    display: flex;
+    justify-content: center;
+    font-family: 'DS Marker Felt', sans-serif;
+}
+
+.spot-description {
+    display: flex;
+    justify-content: center;
+    font-family: 'DS Marker Felt', sans-serif;
+    font-size: large;
+}
+
+.spot-city {
+    display: flex;
+    justify-content: center;
+    font-family: 'DS Marker Felt', sans-serif;
+    font-size: large
+}
+
+.spot-price {
+    display: flex;
+    justify-content: center;
+    font-family: 'DS Marker Felt', sans-serif;
+    font-size: large
+}
+
+
