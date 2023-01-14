@@ -84,7 +84,7 @@ function SignupFormPage() {
       <label>
         First Name
         <input
-          type="password"
+          type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           required
@@ -93,7 +93,7 @@ function SignupFormPage() {
       <label>
         Last Name
         <input
-          type="password"
+          type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           required
